@@ -1,37 +1,58 @@
+import Graphics from '@shepijcanwu/graphics';
+import DraggableProvider, { MouseEventPoint } from '@shepijcanwu/react-draggable-provider';
 declare namespace DraggableProvider {
-  interface HandleFunMap {
-    onMouseDown: (event: React.MouseEvent, delta: Delta) => void,
-    onMouseMove: (event: MouseEvent, delta: Delta) => void,
-    onMouseUp: (event: MouseEvent, delta: Delta) => void,
+  interface DraggableHandleFunMap {
+    onMouseDown: (event: React.MouseEvent, delta: Delta, position: Position) => any;
+    onMouseMove: (event: MouseEvent, delta: Delta, position: Position) => any;
+    onMouseUp: (event: MouseEvent, delta: Delta, position: Position) => any;
   }
-  interface MouseEventPoint {
-    clientX: number;
-    clientY: number;
-  }
-  interface Delta extends MouseEventPoint {
-    changeX: number;
-    changeY: number;
-    lastClientX: number;
-    lastClientY: number;
-  }
-  interface DraggableProviderProps extends Partial<HandleFunMap> {
+  type DraggableMouseHandle = DraggableHandleFunMap;
+  type DraggableBounds = Omit<Graphics.ElementRect, 'width' | 'height' | 'x' | 'y'>;
+
+  type DraggableProps = Partial<DraggableMouseHandle> & {
+    position?: Position;
+    // 默认的 position，一次性效果
+    defaultPosition?: Position;
+    axis?: 'both' | 'x' | 'y' | 'none';
     handle?: string;
-    nodeRef?: React.RefObject<HTMLElement>
-    allowAnyClick?: boolean;
-    children: React.ReactElement
-  }
-  interface DraggableProviderState {
-    delta: Delta
+    grid?: [number, number];
+    // 'window' | 'parent' | elementSelector | DraggableBounds
+    bounds?: string | DraggableBounds;
+    nodeRef?: React.RefObject<HTMLElement>;
+    enableUserSelectHack?: boolean;
+    scale?: number;
+    canMoveable?: boolean;
+    rotate?: number;
+    moveRatio?: number;
+    children?: React.ReactElement;
+  };
+
+  type ClientPoint = MouseEventPoint;
+
+  interface DraggableState {
+    position?: Position;
+    rotate?: number;
+    scale?: number;
+    dragging: boolean;
   }
 
-  export default class DraggableProvider extends React.PureComponent<
-    DraggableProviderProps,
-    DraggableProviderState
+  interface MouseDownCache {
+    clientPoint: ClientPoint;
+    position: Position;
+    bounds: DraggableBounds | null;
+    size: Graphics.Size;
+  }
+
+
+  export default class Draggable extends React.PureComponent<
+    DraggableProps,
+    DraggableState
   > {
-    elementRef: HTMLElement;
+    draggableProvider: React.RefObject<DraggableProvider>;
+    mouseDownCache: Partial<MouseDownCache>;
   }
 }
 
-export = DraggableProvider
-export as namespace DraggableProvider
-export default DraggableProvider;
+export = Draggable
+export as namespace Draggable
+export default Draggable;
