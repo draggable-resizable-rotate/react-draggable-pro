@@ -3,8 +3,9 @@ import {
   ElementRect,
   Size,
 } from '@shepijcanwu/graphics';
-import DraggableProvider, { MouseEventPoint } from '@shepijcanwu/react-draggable-provider';
+import DraggableProvider, { MouseEventPoint, Delta } from '@shepijcanwu/react-draggable-provider';
 declare namespace Draggable {
+  type DraggableDelta = Delta;
   interface DraggableMouseHandle {
     onMouseDown: (event: React.MouseEvent, delta: Delta, position: Position) => any;
     onMouseMove: (event: MouseEvent, delta: Delta, position: Position) => any;

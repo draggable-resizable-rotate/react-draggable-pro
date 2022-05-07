@@ -19,6 +19,8 @@ export interface DraggableMouseHandle {
   onMouseUp: (event: MouseEvent, delta: Delta, position: Position) => any;
 }
 
+export type DraggableDelta = Delta;
+
 export type DraggableBounds = Omit<ElementRect, 'width' | 'height' | 'x' | 'y'>;
 
 export type DraggableProps = Partial<DraggableMouseHandle> & {
