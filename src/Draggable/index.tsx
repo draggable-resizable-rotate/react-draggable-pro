@@ -256,7 +256,7 @@ class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
     const { props, draggableProvider } = this;
     const { enableUserSelectHack = true } = props;
     const element = draggableProvider.current?.elementRef as HTMLElement;
-    if (enableUserSelectHack) addUserSelectStyles(element.ownerDocument);
+    if (enableUserSelectHack) removeUserSelectStyles(element.ownerDocument);
   }
 
   // 优先考虑得到当前点、前一点 => 计算出 下一次的前一个点 => 计算有效位置
