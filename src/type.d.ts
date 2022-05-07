@@ -1,6 +1,6 @@
 import Graphics from '@shepijcanwu/graphics';
 import DraggableProvider, { MouseEventPoint } from '@shepijcanwu/react-draggable-provider';
-declare namespace DraggableProvider {
+declare namespace Draggable {
   interface DraggableHandleFunMap {
     onMouseDown: (event: React.MouseEvent, delta: Delta, position: Position) => any;
     onMouseMove: (event: MouseEvent, delta: Delta, position: Position) => any;
