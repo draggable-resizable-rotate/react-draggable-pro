@@ -2,14 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Draggable from './Draggable';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <DraggableTest />
-  </React.StrictMode>,
-  document.getElementById('root'),
-);
-
-export default function DraggableTest() {
+function DraggableTest() {
   const [position, setPosition] = useState({
     left: 100,
     top: 100,
@@ -22,16 +15,16 @@ export default function DraggableTest() {
 
   const [canMoveable, setCanMoveable] = useState(true);
   const [count, setCount] = useState(0);
-  const ref = useRef();
+  const ref = useRef<HTMLElement>();
 
   return (
     <div>
       <Draggable
-        bounds="body"
+        bounds="window"
         canMoveable={canMoveable}
         position={position}
         scale={2}
-        moveRatio={2}
+        // moveRatio={2}
         nodeRef={ref}
         onMouseUp={(e, d, position) => {
           // setCount(count => count + 1);
@@ -50,3 +43,10 @@ export default function DraggableTest() {
     </div>
   );
 }
+
+ReactDOM.render(
+  <React.StrictMode>
+    <DraggableTest />
+  </React.StrictMode>,
+  document.getElementById('root'),
+);

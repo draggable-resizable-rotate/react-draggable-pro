@@ -6,7 +6,6 @@ import DraggableProvider, {
   MouseEventPoint,
 } from '@shepijcanwu/react-draggable-provider';
 import { addUserSelectStyles, getSafeObjectValue, removeUserSelectStyles } from './utils';
-const { parseMatrix } = Matrix;
 
 export type DraggableMouseHandle = DraggableHandleFunMap;
 export interface DraggableHandleFunMap {
@@ -35,6 +34,7 @@ export type DraggableProps = Partial<DraggableHandleFunMap> & {
   canMoveable?: boolean;
   rotate?: number;
   moveRatio?: number;
+  children?: React.ReactElement;
 };
 
 export type ClientPoint = MouseEventPoint;
@@ -53,6 +53,8 @@ interface MouseDownCache {
   size: Graphics.Size;
 }
 
+const { parseMatrix } = Matrix;
+
 class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
   // DraggableProvider ReactComponent Ref
   draggableProvider: React.RefObject<DraggableProvider>;
@@ -68,11 +70,6 @@ class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
     };
     this.draggableProvider = React.createRef<DraggableProvider>();
     this.mouseDownCache = {};
-  }
-
-  // position 是否有效
-  isValidPosition(position: Position) {
-    return Object.is(NaN, position.left) && Object.is(NaN, position.top);
   }
 
   componentDidMount() {
@@ -128,7 +125,7 @@ class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
   }
 
   // get bounds
-  getJudgeBounds(validPosition: Position): DraggableBounds | null {
+  getValidBounds(validPosition: Position): DraggableBounds | null {
     const { bounds } = this.props;
     if (!bounds) return null;
     if (typeof bounds === 'object') {
@@ -237,7 +234,7 @@ class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
     this.mouseDownCache.position = {
       ...validPosition,
     };
-    this.mouseDownCache.bounds = this.getJudgeBounds(validPosition);
+    this.mouseDownCache.bounds = this.getValidBounds(validPosition);
     this.mouseDownCache.size = {
       width: element.offsetWidth,
       height: element.offsetHeight,

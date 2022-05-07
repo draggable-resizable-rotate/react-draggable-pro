@@ -110,7 +110,19 @@ const externals = {
     'commonjs2': 'react-dom',
     'amd': 'react-dom',
     'root': 'ReactDOM'
-  }
+  },
+  '@shepijcanwu/graphics': {
+    'commonjs': '@shepijcanwu/graphics',
+    'commonjs2': '@shepijcanwu/graphics',
+    'amd': '@shepijcanwu/graphics',
+    'root': 'Graphics'
+  },
+  '@shepijcanwu/react-draggable-provider': {
+    'commonjs': '@shepijcanwu/react-draggable-provider',
+    'commonjs2': '@shepijcanwu/react-draggable-provider',
+    'amd': '@shepijcanwu/react-draggable-provider',
+    'root': 'ReactDraggableProvider'
+  },
 };
 
 module.exports = {
