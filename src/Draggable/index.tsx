@@ -1,4 +1,11 @@
-import Graphics, { Matrix, getElementDocumentRect, getRelativePoint } from '@shepijcanwu/graphics';
+import {
+  Matrix,
+  getElementDocumentRect,
+  getRelativePoint,
+  Position,
+  ElementRect,
+  Size,
+} from '@shepijcanwu/graphics';
 import React from 'react';
 import DraggableProvider, {
   Delta,
@@ -6,20 +13,15 @@ import DraggableProvider, {
   MouseEventPoint,
 } from '@shepijcanwu/react-draggable-provider';
 import { addUserSelectStyles, getSafeObjectValue, removeUserSelectStyles } from './utils';
-
-export type DraggableMouseHandle = DraggableHandleFunMap;
-export interface DraggableHandleFunMap {
+export interface DraggableMouseHandle {
   onMouseDown: (event: React.MouseEvent, delta: Delta, position: Position) => any;
   onMouseMove: (event: MouseEvent, delta: Delta, position: Position) => any;
   onMouseUp: (event: MouseEvent, delta: Delta, position: Position) => any;
 }
 
-export type Position = Graphics.Position;
-
-export type ElementRect = Graphics.ElementRect;
 export type DraggableBounds = Omit<ElementRect, 'width' | 'height' | 'x' | 'y'>;
 
-export type DraggableProps = Partial<DraggableHandleFunMap> & {
+export type DraggableProps = Partial<DraggableMouseHandle> & {
   position?: Position;
   // 默认的 position，一次性效果
   defaultPosition?: Position;
@@ -34,7 +36,7 @@ export type DraggableProps = Partial<DraggableHandleFunMap> & {
   canMoveable?: boolean;
   rotate?: number;
   moveRatio?: number;
-  children?: React.ReactElement;
+  children?: React.ReactNode;
 };
 
 export type ClientPoint = MouseEventPoint;
@@ -50,7 +52,7 @@ interface MouseDownCache {
   clientPoint: ClientPoint;
   position: Position;
   bounds: DraggableBounds | null;
-  size: Graphics.Size;
+  size: Size;
 }
 
 const { parseMatrix } = Matrix;
@@ -242,8 +244,8 @@ class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
     this.setState({
       dragging: true,
       position: { ...validPosition },
-      rotate: this.props.rotate || this.state.rotate,
-      scale: this.props.scale === undefined ? this.state.scale : this.props.scale,
+      rotate: this.props.rotate === undefined ? this.props.rotate : this.state.rotate,
+      scale: this.props.scale === undefined ? this.props.scale : this.state.scale,
     });
     props.onMouseDown?.(event, getSafeObjectValue(delta), getSafeObjectValue(validPosition));
   };

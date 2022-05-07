@@ -1,13 +1,16 @@
-import Graphics from '@shepijcanwu/graphics';
+import {
+  Position,
+  ElementRect,
+  Size,
+} from '@shepijcanwu/graphics';
 import DraggableProvider, { MouseEventPoint } from '@shepijcanwu/react-draggable-provider';
 declare namespace Draggable {
-  interface DraggableHandleFunMap {
+  interface DraggableMouseHandle {
     onMouseDown: (event: React.MouseEvent, delta: Delta, position: Position) => any;
     onMouseMove: (event: MouseEvent, delta: Delta, position: Position) => any;
     onMouseUp: (event: MouseEvent, delta: Delta, position: Position) => any;
   }
-  type DraggableMouseHandle = DraggableHandleFunMap;
-  type DraggableBounds = Omit<Graphics.ElementRect, 'width' | 'height' | 'x' | 'y'>;
+  type DraggableBounds = Omit<ElementRect, 'width' | 'height' | 'x' | 'y'>;
 
   type DraggableProps = Partial<DraggableMouseHandle> & {
     position?: Position;
@@ -24,7 +27,7 @@ declare namespace Draggable {
     canMoveable?: boolean;
     rotate?: number;
     moveRatio?: number;
-    children?: React.ReactElement;
+    children?: React.ReactNode;
   };
 
   type ClientPoint = MouseEventPoint;
@@ -40,7 +43,7 @@ declare namespace Draggable {
     clientPoint: ClientPoint;
     position: Position;
     bounds: DraggableBounds | null;
-    size: Graphics.Size;
+    size: Size;
   }
 
 
