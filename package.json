@@ -1,6 +1,6 @@
 {
-  "name": "@shepijcanwu/react-draggable-pro",
-  "version": "1.0.7",
+  "name": "@draggable-resizable-rotate/react-draggable-pro",
+  "version": "1.0.0",
   "description": "to enhance react-draggable",
   "keywords": [
     "react",
@@ -53,8 +53,8 @@
     ]
   },
   "dependencies": {
-    "@shepijcanwu/graphics": "^1.3.2",
-    "@shepijcanwu/react-draggable-provider": "^1.0.4",
+    "@draggable-resizable-rotate/graphics": "^1.0.0",
+    "@draggable-resizable-rotate/react-draggable-provider": "^1.0.0",
     "core-js": "^3.20.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
