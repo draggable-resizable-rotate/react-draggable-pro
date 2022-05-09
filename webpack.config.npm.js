@@ -111,16 +111,16 @@ const externals = {
     'amd': 'react-dom',
     'root': 'ReactDOM'
   },
-  '@shepijcanwu/graphics': {
-    'commonjs': '@shepijcanwu/graphics',
-    'commonjs2': '@shepijcanwu/graphics',
-    'amd': '@shepijcanwu/graphics',
+  '@draggable-resizable-rotate/graphics': {
+    'commonjs': '@draggable-resizable-rotate/graphics',
+    'commonjs2': '@draggable-resizable-rotate/graphics',
+    'amd': '@draggable-resizable-rotate/graphics',
     'root': 'Graphics'
   },
-  '@shepijcanwu/react-draggable-provider': {
-    'commonjs': '@shepijcanwu/react-draggable-provider',
-    'commonjs2': '@shepijcanwu/react-draggable-provider',
-    'amd': '@shepijcanwu/react-draggable-provider',
+  '@draggable-resizable-rotate/react-draggable-provider': {
+    'commonjs': '@draggable-resizable-rotate/react-draggable-provider',
+    'commonjs2': '@draggable-resizable-rotate/react-draggable-provider',
+    'amd': '@draggable-resizable-rotate/react-draggable-provider',
     'root': 'ReactDraggableProvider'
   },
 };

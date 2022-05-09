@@ -5,13 +5,13 @@ import {
   Position,
   ElementRect,
   Size,
-} from '@shepijcanwu/graphics';
+} from '@draggable-resizable-rotate/graphics';
 import React from 'react';
 import DraggableProvider, {
   Delta,
   HandleFunMap,
   MouseEventPoint,
-} from '@shepijcanwu/react-draggable-provider';
+} from '@draggable-resizable-rotate/react-draggable-provider';
 import { addUserSelectStyles, getSafeObjectValue, removeUserSelectStyles } from './utils';
 export interface DraggableMouseHandle {
   onMouseDown: (event: React.MouseEvent, delta: Delta, position: Position) => any;

@@ -2,8 +2,8 @@ import {
   Position,
   ElementRect,
   Size,
-} from '@shepijcanwu/graphics';
-import DraggableProvider, { MouseEventPoint, Delta } from '@shepijcanwu/react-draggable-provider';
+} from '@draggable-resizable-rotate/graphics';
+import DraggableProvider, { MouseEventPoint, Delta } from '@draggable-resizable-rotate/react-draggable-provider';
 declare namespace Draggable {
   type DraggableDelta = Delta;
   interface DraggableMouseHandle {
