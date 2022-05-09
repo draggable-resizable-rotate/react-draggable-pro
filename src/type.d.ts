@@ -3,7 +3,8 @@ import {
   ElementRect,
   Size,
 } from '@draggable-resizable-rotate/graphics';
-import DraggableProvider, { MouseEventPoint, Delta } from '@draggable-resizable-rotate/react-draggable-provider';
+import DraggableProvider, { MouseEventPoint, Delta, HandleFunMap } from '@draggable-resizable-rotate/react-draggable-provider';
+import React from 'react';
 declare namespace Draggable {
   type DraggableDelta = Delta;
   interface DraggableMouseHandle {
@@ -54,6 +55,10 @@ declare namespace Draggable {
   > {
     draggableProvider: React.RefObject<DraggableProvider>;
     mouseDownCache: Partial<MouseDownCache>;
+    onMouseDown: HandleFunMap['onMouseDown'];
+    onMouseMove: HandleFunMap['onMouseMove'];
+    onMouseUp: HandleFunMap['onMouseUp'];
+    getTransformStyle: React.CSSProperties;
   }
 }
 
