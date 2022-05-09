@@ -59,6 +59,7 @@ declare namespace Draggable {
     onMouseMove: HandleFunMap['onMouseMove'];
     onMouseUp: HandleFunMap['onMouseUp'];
     getTransformStyle: React.CSSProperties;
+    updatePosition: (position: Position) => void;
   }
 }
 

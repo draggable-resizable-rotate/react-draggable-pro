@@ -345,6 +345,10 @@ class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
     return transformStyle;
   }
 
+  updatePosition(position: Position) {
+    this.setState({position});
+  }
+
   render(): React.ReactNode {
     const { props } = this;
 
