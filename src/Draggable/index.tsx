@@ -246,8 +246,8 @@ class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
     this.setState({
       dragging: true,
       position: { ...validPosition },
-      rotate: this.props.rotate === undefined ? this.props.rotate : this.state.rotate,
-      scale: this.props.scale === undefined ? this.props.scale : this.state.scale,
+      rotate: props.rotate !== undefined ? props.rotate : state.rotate,
+      scale: props.scale !== undefined ? props.scale : state.scale,
     });
     props.onMouseDown?.(event, getSafeObjectValue(delta), getSafeObjectValue(validPosition));
   };
