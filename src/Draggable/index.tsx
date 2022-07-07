@@ -309,13 +309,16 @@ class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
   };
 
   onMouseUp: HandleFunMap['onMouseUp'] = (event, delta) => {
-    const { props, draggableProvider, state } = this;
-    const { enableUserSelectHack = true } = props;
+    const { props, draggableProvider, state, mouseDownCache } = this;
+    const { enableUserSelectHack = true, position: propsPosition } = props;
+    const { position: mouseDownPosition } = mouseDownCache as MouseDownCache;
     const { position } = state as Required<DraggableState>;
     const element = draggableProvider.current?.elementRef as HTMLElement;
     if (enableUserSelectHack) removeUserSelectStyles(element.ownerDocument);
+    // 结束之后同步props的数据到state，如果没有那么用mousedown的position数据
     this.setState({
       dragging: false,
+      position: propsPosition ? { ...propsPosition } : { ...mouseDownPosition },
     });
     props.onMouseUp?.(event, getSafeObjectValue(delta), getSafeObjectValue(position));
   };
@@ -346,7 +349,18 @@ class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
   }
 
   updatePosition(position: Position) {
-    this.setState({position});
+    this.setState({ position });
+  }
+
+  movePosition(position: Position) {
+    this.setState(({position: oldPosition}) => {
+      return {
+        position: {
+          left: (oldPosition?.left || 0) + position.left,
+          top: (oldPosition?.top || 0) + position.top,
+        }
+      };
+    });
   }
 
   render(): React.ReactNode {
