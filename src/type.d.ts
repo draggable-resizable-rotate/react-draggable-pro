@@ -61,6 +61,8 @@ declare namespace Draggable {
     getTransformStyle: React.CSSProperties;
     updatePosition: (position: Position) => void;
     movePosition: (position: Position) => void;
+    getValidBounds: (validPosition: Position) => DraggableBounds | null;
+    getValidPositionByBounds(position: Position, bounds: DraggableBounds): Position;
   }
 }
 

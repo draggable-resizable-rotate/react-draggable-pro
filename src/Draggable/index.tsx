@@ -11,8 +11,11 @@ import DraggableProvider, {
   Delta,
   HandleFunMap,
   MouseEventPoint,
+  addUserSelectStyles,
+  getSafeObjectValue,
+  removeUserSelectStyles,
 } from '@draggable-resizable-rotate/react-draggable-provider';
-import { addUserSelectStyles, getSafeObjectValue, removeUserSelectStyles } from './utils';
+
 export interface DraggableMouseHandle {
   onMouseDown: (event: React.MouseEvent, delta: Delta, position: Position) => any;
   onMouseMove: (event: MouseEvent, delta: Delta, position: Position) => any;
@@ -353,12 +356,12 @@ class Draggable extends React.PureComponent<DraggableProps, DraggableState> {
   }
 
   movePosition(position: Position) {
-    this.setState(({position: oldPosition}) => {
+    this.setState(({ position: oldPosition }) => {
       return {
         position: {
           left: (oldPosition?.left || 0) + position.left,
           top: (oldPosition?.top || 0) + position.top,
-        }
+        },
       };
     });
   }
